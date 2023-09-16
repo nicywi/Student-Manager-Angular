@@ -6,5 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./students-list.component.css']
 })
 export class StudentsListComponent {
+  isLoaded = false;
+  btnTitle = "Show";
+
+  search(){
+    console.log("Kliknelo przycisk Search");
+    this.isLoaded = !this.isLoaded;
+
+    if(this.isLoaded){
+      this.btnTitle = "Hide"
+    }else{
+      this.btnTitle = "Show";
+    }
+  }
+
 
 }
