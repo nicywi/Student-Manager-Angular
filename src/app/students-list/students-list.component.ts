@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { StudentService } from '../student.service';
+import { Student } from '../students';
 
 @Component({
   selector: 'app-students-list',
@@ -8,17 +10,29 @@ import { Component } from '@angular/core';
 export class StudentsListComponent {
   isLoaded = false;
   btnTitle = "Show";
+  students: Student[] = [];
 
-  search(){
+  constructor(private studentService: StudentService) {
+
+  }
+
+  search() {
     console.log("Kliknelo przycisk Search");
     this.isLoaded = !this.isLoaded;
 
-    if(this.isLoaded){
+    if (this.isLoaded) {
       this.btnTitle = "Hide"
-    }else{
+      this.studentService.getStudents().subscribe(data => {
+        console.log("wewnatrz subscribe");
+        console.log(data);
+        this.students = data
+      });
+      console.log("poza subscribe");
+
+    } else {
       this.btnTitle = "Show";
     }
-  }
 
+  }
 
 }

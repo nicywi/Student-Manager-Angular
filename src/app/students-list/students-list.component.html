@@ -8,37 +8,19 @@
           <th>ID</th>
           <th>Name and surname</th>
           <th>E-mail address</th>
-          <th>Actions</th>
+          <!-- <th>Actions</th> -->
         </tr>
       </thead>
       <tbody *ngIf="isLoaded == true">
-        <tr>
-          <td>1</td>
-          <td>Jan Kowalski</td>
-          <td><a href="mailto:jan@kowalski.pl">jan@kowalski.pl</a></td>
-          <td>
+        <tr *ngFor="let student of students">
+          <td>{{student.id}}</td>
+          <td>{{student.name}}</td>
+          <td>{{student.email}}</td>
+          <!-- <td>
             <a href="#" class="button button-green">Edytuj</a>
             <button class="button button-red">Usuń</button>
-          </td>
+          </td> -->
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Adam Kowalski</td>
-          <td><a href="mailto:adam@kowalski.pl">adam@kowalski.pl</a></td>
-          <td>
-            <a href="#" class="button button-green">Edytuj</a>
-            <button class="button button-red">Usuń</button>
-          </td>
-         </tr>
-         <tr>
-          <td>3</td>
-          <td>Marian Ziemniak</td>
-          <td><a href="mailto:adam@kowalski.pl">marian@ziemniak.pl</a></td>
-          <td>
-            <a href="#" class="button button-green">Edytuj</a>
-            <button class="button button-red">Usuń</button>
-          </td>
-         </tr>
       </tbody>
     </table>
   </section>
