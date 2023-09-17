@@ -58,5 +58,11 @@ export class StudentsListComponent {
 
   delete(id: number){
     alert("Kliknieto przycisk usun. Na studencie o id = " + id);
+
+    this.studentService.deleteStudent(id)
+    .subscribe(()=>{
+      //weryf
+      this.students =this.students.filter(x=>x.id != id);
+    })
   }
 }
