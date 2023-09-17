@@ -1,3 +1,8 @@
 .custom-nav-color{
     background-color: #96b9db !important;
 }
+
+.active-nav{
+    color: white;
+    font-weight: bold;
+}

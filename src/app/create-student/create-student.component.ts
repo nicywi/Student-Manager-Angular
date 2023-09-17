@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class CreateStudentComponent {
 
+  save(name: string, email: string){
+alert("Imie i nazwisko: " + name + ", email: " + email);
+
+    return false;
+  
+  }
+
 }
