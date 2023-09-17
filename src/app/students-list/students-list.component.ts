@@ -13,6 +13,7 @@ export class StudentsListComponent {
   isLoaded = false;
   btnTitle = "Pokaż";
   students: Student[] = [];
+  copyStudents: Student[] = [];
   isDataSearching = false;
   isErrorOccured = false;
 
@@ -64,5 +65,12 @@ export class StudentsListComponent {
       //weryf
       this.students =this.students.filter(x=>x.id != id);
     })
+  }
+
+  searchBy(searchPhrase : string){
+    this.students = 
+      this.copyStudents
+      .filter(x=>x.name.toLowerCase()
+        .startsWith(searchPhrase.toLowerCase()));
   }
 }

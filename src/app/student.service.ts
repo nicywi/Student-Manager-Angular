@@ -21,4 +21,10 @@ export class StudentService {
     let studentUrl = this.url + "/" + studentId;
     return this.httpClient.delete<Student>(studentUrl);
   }
+
+  //metoda odpowiedzialna za wysylanie zadania POST
+  addStudent(student: Student) {
+    return this.httpClient.post<Student>(this.url, student);
+  }
+
 }

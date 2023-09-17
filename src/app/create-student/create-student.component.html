@@ -1,21 +1,26 @@
 <h4>Dodaj studenta</h4>
 
-<form>
+<form (submit)="save(name.value, email.value)">
     <!-- Imie i nazwisko studenta -->
-<div style="margin-top: 10px">
-    <label class="form-label">Imię i nazwisko: </label>
-    <input class="form-control" placeholder="Wprowadz imie i nazwisko" #name>
-</div>
+    <div style="margin-top: 10px">
+        <label class="form-label">Imię i nazwisko: </label>
+        <input required class="form-control" placeholder="Wprowadz imie i nazwisko" #name>
+    </div>
 
     <!-- Email studenta -->
     <div style="margin-top: 10px">
         <label class="form-label">Email: </label>
-        <input class="form-control" placeholder="Wprowadz email" #email>
+        <input required class="form-control" placeholder="Wprowadz email" #email>
     </div>
 
     <!-- Przycisk zapisu -->
     <div style="margin-top: 20px">
-        <button class="btn btn-success">Zapisz</button>
+        <button [disabled]="isAddedProcessing" class="btn btn-success"><span *ngIf="isAddedProcessing"
+                class="spinner-border spinner-border-sm" aria-hidden="true"></span>Zapisz</button>
 
     </div>
 </form>
+
+<div *ngIf="isAddedSuccessful" style="margin-top: 20px" class="alert alert-success" role="alert">
+    Dodano studenta
+</div>

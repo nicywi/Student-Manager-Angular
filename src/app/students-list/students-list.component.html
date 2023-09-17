@@ -12,6 +12,14 @@ style="font-size:10px;color:red">
 Wystąpił błąd w wyszukiwaniu danych!
 </p>
 
+<form (submit)="searchBy(search_input.value)">
+    <label>Szukane słowo</label>
+    <input type="text" class="form-control" #search_input />
+    <button style="margin-top:10px" type="submit" class="btn btn-primary">
+        Wyszukaj
+    </button>
+</form>
+
 <table class="table table-striped table-hover">
     <!-- Nagłowek -->
     <thead>
