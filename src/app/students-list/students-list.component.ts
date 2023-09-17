@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { StudentService } from '../student.service';
+import { delay } from 'rxjs';
 import { Student } from '../students';
+
 
 @Component({
   selector: 'app-students-list',
@@ -9,30 +11,52 @@ import { Student } from '../students';
 })
 export class StudentsListComponent {
   isLoaded = false;
-  btnTitle = "Show";
+  btnTitle = "Pokaż";
   students: Student[] = [];
+  isDataSearching = false;
+  isErrorOccured = false;
 
   constructor(private studentService: StudentService) {
 
   }
 
   search() {
-    console.log("Kliknelo przycisk Search");
+    console.log("Kliknięto przycisk Wyszukaj!");
     this.isLoaded = !this.isLoaded;
 
     if (this.isLoaded) {
-      this.btnTitle = "Hide"
-      this.studentService.getStudents().subscribe(data => {
-        console.log("wewnatrz subscribe");
-        console.log(data);
-        this.students = data
-      });
-      console.log("poza subscribe");
 
+      this.isDataSearching = true;
+      this.btnTitle = "Wyszukiwanie...";
+      this.students = [];
+
+      this.studentService.getStudents()
+        .pipe(delay(2000))
+        .subscribe({
+          next: data => {
+            console.log("wewnatrz subscribe");
+            console.log(data);
+            this.students = data;
+
+            this.isDataSearching = false;
+            this.btnTitle = "Ukryj"
+          },
+          error: ()=>{
+            this.isDataSearching = false;
+            this.isLoaded = false;
+            this.btnTitle = "Pokaż"
+            this.isErrorOccured = true;
+          },
+        });
+
+      console.log("poza subscribe");
     } else {
-      this.btnTitle = "Show";
+      this.btnTitle = "Pokaż";
     }
 
   }
 
+  delete(id: number){
+    alert("Kliknieto przycisk usun. Na studencie o id = " + id);
+  }
 }
