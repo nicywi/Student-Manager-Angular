@@ -35,4 +35,10 @@ getStudentByID(studentid: number){
     return this.httpClient.post<Student>(this.url, student);
   }
 
+  //Metoda odpowiedzialna za wyslanie requesta PUT
+  updateStudent(student: Student){
+    let studentUrl = this.url + "/" + student.id;
+    return this.httpClient.put<Student>(studentUrl, student);
+  }
+
 }

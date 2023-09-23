@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StudentService } from '../student.service';
 import { Student } from '../students';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-edit-student',
@@ -9,11 +10,17 @@ import { Student } from '../students';
   styleUrls: ['./edit-student.component.css']
 })
 export class EditStudentComponent {
+//Request typu PUT ->
+
+
+
   //Napisac request typu GET do pobrania danych studenta o określonym id - StudentService
   //Upewnimy sie ze dane sa w porzadku 
   //Zbudujemy draft formularza edycji
   //Bootstrap -> ostylowanie formularza
   student!: Student;
+  isSuccessUpdate =false;
+  isUpdateProcessing = false;
 
   constructor(private activatedRoute: ActivatedRoute, private studentService: StudentService) {
     this.activatedRoute.params.subscribe(param => {
@@ -25,5 +32,16 @@ export class EditStudentComponent {
     });
 
   }
+
+  save(){
+    this.isUpdateProcessing = true;
+
+    this.studentService.updateStudent(this.student).pipe(delay(2000))
+      .subscribe(data=>{
+          //alert("Dokonano aktualizacji!")
+          this.isSuccessUpdate = true;
+          this.isUpdateProcessing =false;
+        });
+}
 
 }
