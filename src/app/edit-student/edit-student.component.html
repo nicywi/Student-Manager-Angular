@@ -1,0 +1,22 @@
+<ng-container *ngIf="student">
+
+    <h4>Edytuj studenta - {{student.name}}</h4>
+    
+    <form>
+        <div>
+            <label class="form-label">Imię i nazwisko studenta: </label>
+            <input name="studentName" [(ngModel)]="student.name" class="form-control" type="text">
+        </div>
+    
+        <div>
+            <label class="form-label">Adres email: </label>
+            <input name="studentEmail" [(ngModel)]="student.email" class="form-control" type="email">
+        </div>
+    
+        <div style="margin-top: 15px;">
+            <button class="btn btn-outline-success">Zapisz</button>
+        </div>
+    </form>
+
+</ng-container>
+

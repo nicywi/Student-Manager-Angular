@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StudentService } from '../student.service';
-import { delay } from 'rxjs';
 import { Student } from '../students';
+import { delay } from 'rxjs';
 
 
 @Component({
@@ -21,6 +21,13 @@ export class StudentsListComponent {
 
   }
 
+  searchBy(searchPhrase : string){
+    this.students = 
+      this.copyStudents
+      .filter(x=>x.name.toLowerCase()
+        .startsWith(searchPhrase.toLowerCase()));
+  }
+
   search() {
     console.log("Kliknięto przycisk Wyszukaj!");
     this.isLoaded = !this.isLoaded;
@@ -38,7 +45,7 @@ export class StudentsListComponent {
             console.log("wewnatrz subscribe");
             console.log(data);
             this.students = data;
-
+            this.copyStudents = data;
             this.isDataSearching = false;
             this.btnTitle = "Ukryj"
           },
@@ -57,20 +64,13 @@ export class StudentsListComponent {
 
   }
 
-  delete(id: number){
-    alert("Kliknieto przycisk usun. Na studencie o id = " + id);
+  delete(id : number){
+    //alert("Kliknięto przycisk usuń! Na studencie o id = " + id);
 
     this.studentService.deleteStudent(id)
-    .subscribe(()=>{
-      //weryf
-      this.students =this.students.filter(x=>x.id != id);
-    })
-  }
-
-  searchBy(searchPhrase : string){
-    this.students = 
-      this.copyStudents
-      .filter(x=>x.name.toLowerCase()
-        .startsWith(searchPhrase.toLowerCase()));
+      .subscribe(()=>{
+        //Wyfiltrować z aktualnej tablicy studentów wszystkich którzy mają inne id niż to usuwane
+        this.students = this.students.filter(x=>x.id != id);
+      });
   }
 }

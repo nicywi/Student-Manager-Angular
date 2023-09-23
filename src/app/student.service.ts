@@ -9,7 +9,15 @@ export class StudentService {
 
   private url = "https://jsonplaceholder.typicode.com/users";
 
+
   constructor(private httpClient: HttpClient) { }
+
+  //Metoda odpowiedzialana za pobieranie studenta o okreslonym id z aplikacji backend
+getStudentByID(studentid: number){
+  let studentUrl = this.url + "/" + studentid;
+  return this.httpClient.get<Student>(studentUrl);
+}
+
   //metoda odpowiedzialna za pobieranie studentow z aplikacji backendowej
   getStudents() {
     return this.httpClient.get<Student[]>(this.url);

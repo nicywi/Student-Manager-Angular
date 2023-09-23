@@ -27,7 +27,7 @@ Wystąpił błąd w wyszukiwaniu danych!
             <th>Id</th>
             <th>Imię i nazwisko</th>
             <th>Email</th>
-            <th></th>
+            <th>Operacje</th>
         </tr>
     </thead>
 
@@ -35,12 +35,14 @@ Wystąpił błąd w wyszukiwaniu danych!
     <tbody *ngIf="isLoaded == true">
         <tr [ngClass]="{'table-primary': student.id ==2,
             'table-warning' : student.id > 7,
-            'table-danger': student.name == 'Chelsey Dietrich'}" *ngFor="let student of students">
+            'table-danger': student.name == 'Chelsey Dietrich'}" 
+            *ngFor="let student of students">
             <td>{{student.id}}</td>
             <td>{{student.name | uppercase | lowercase | uppercase}}</td>
             <td><a *ngIf="student.id > 5" href="#">{{student.email | lowercase}}</a></td>
             <td>
-              <button (click)="delete(student.id)" type="button" class="btn btn-outline-danger">Usuń</button>
+                <a [routerLink]="'/edit-student/' + student.id" class="btn btn-outline-primary" style="margin-right: 20px;">Edycja</a>
+                <button (click)="delete(student.id)" type="button" class="btn btn-outline-danger">Usuń</button>
             </td>
         </tr>
     </tbody>
